@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dobby.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dobby.settings.deploy')
 
 application = get_wsgi_application()

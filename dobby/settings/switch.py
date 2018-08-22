@@ -1,0 +1,1 @@
+MODE = 'dobby.settings.debug'
