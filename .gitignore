@@ -125,6 +125,6 @@ db.sqlite3
 media
 staticfiles/
 
-
-
+# mac file
+.DS_Store
 
