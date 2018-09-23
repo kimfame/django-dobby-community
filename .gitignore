@@ -1,5 +1,6 @@
 ### Python ###
 # Byte-compiled / optimized / DLL files
+__pycache__/
 *.py[cod]
 *$py.class
 
@@ -49,8 +50,12 @@ coverage.xml
 
 # Translations
 *.mo
+*.pot
 
 # Django stuff:
+*.log
+local_settings.py
+db.sqlite3
 
 # Flask stuff:
 instance/
@@ -116,19 +121,17 @@ pip-selfcheck.json
 
 
 ### Django ###
-*.log
-*.pot
 *.pyc
-__pycache__/
-local_settings.py
-db.sqlite3
 media
 staticfiles/
+migrations/
 
 # mac file
 .DS_Store
 
 # secret data
 secrets.json
+
+
 
 
