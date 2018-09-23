@@ -128,3 +128,7 @@ staticfiles/
 # mac file
 .DS_Store
 
+# secret data
+secrets.json
+
+

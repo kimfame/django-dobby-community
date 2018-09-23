@@ -34,3 +34,6 @@ class ComputerBoard(BaseBoard):
 class ProgrammingBoard(BaseBoard):
 	pass
 
+
+class TravelBoard(BaseBoard):
+	pass
