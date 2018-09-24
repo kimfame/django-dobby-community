@@ -1,16 +1,16 @@
 <h1>TEST PAGE</h1>
 
 
-{% if board %}
+{% if list %}
 <table>
-	{% for list in board %}
+	{% for row in list %}
 	<tr>
-		<td>{{ list.idx }}</td>
-		<td>{{ list.title }}</td>
-		<td>{{ list.nickname }}</td>
-		<td>{{ list.hit }}</td>
-		<td>{{ list.updated }}</td>
-		<td>{{ list.created }}</td>
+		<td>{{ row.id }}</td>
+		<td>{{ row.title }}</td>
+		<td>{{ row.nickname }}</td>
+		<td>{{ row.hit }}</td>
+		<td>{{ row.updated }}</td>
+		<td>{{ row.created }}</td>
 	</tr>
 	{% endfor %}
 </table>

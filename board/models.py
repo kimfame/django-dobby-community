@@ -2,8 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-
-
+# add fields in User Model
 # class User(models.Model):
 # 	userid = 
 # 	username = 
@@ -12,12 +11,12 @@ from django.utils import timezone
 # 	gender = 
 # 	email =  
 
-
 class BaseBoard(models.Model):
 	class Meta:
 		abstract = True	
 
 	title = models.CharField(max_length=200)
+	content = models.TextField()
 	nickname = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
 	hit = models.PositiveIntegerField(default=0)
 	updated = models.DateTimeField(auto_now=True)
@@ -27,13 +26,11 @@ class BaseBoard(models.Model):
 		return self.title
 
 
-class ComputerBoard(BaseBoard):
+class Computer(BaseBoard):
 	pass
 
-
-class ProgrammingBoard(BaseBoard):
+class Programming(BaseBoard):
 	pass
 
-
-class TravelBoard(BaseBoard):
+class Travel(BaseBoard):
 	pass
