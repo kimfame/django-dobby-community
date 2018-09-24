@@ -27,7 +27,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 
 
 ################################# method 1
-# def getModel(db_table_name):
+# def get_model(db_table_name):
 # 	class MyClassMetaclass(models.base.ModelBase):
 # 		def __new__(cls, name, bases, attrs):
 # 		  	name += db_table
@@ -42,13 +42,13 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 # 	return MyClass
 
 ################################ method 2
-def getModel(db_table_name):
-	class BoardClass(BaseBoard):
+# def get_model(db_table_name):
+# 	class BoardClass(BaseBoard):
 
-		class Meta:
-			db_table = db_table_name
+# 		class Meta:
+# 			db_table = db_table_name
 
-	return BoardClass
+# 	return BoardClass
 
 ##################################### class 
 # class TableController():
@@ -72,32 +72,36 @@ def getModel(db_table_name):
 
 
 ################################# global
-# tables = ["computer", "programming", "travel"]
-# table_map = {}
+tables = ["computer", "programming", "travel"]
+table_map = {}
+print("*********************************** GLOBAL")
 
-# for table in tables:
-# 	print("================ " + table)
-# 	class BoardClass(BaseBoard):
+for table in tables:
+	print("===> " + table)
+	class BoardClass(BaseBoard):
 
-# 		class Meta:
-# 			db_table = "board_" + table
+		class Meta:
+			db_table = "board_" + table
 
-# 	table_map[table] = BoardClass
+	table_map[table] = BoardClass
+
+def get_model(db_table_name):
+	global table_map
+	return table_map[db_table_name]
 
 
 
-class index(ListView):
-	#model = getModel("board_travel")
-
+class IndexView(ListView):
+	
+	# 20-30
+	paginate_by = 3
 	context_object_name = 'list'
-
 	template_name = 'board/index.html'
-
+	
 	def get_queryset(self):
-		return getModel("travel").objects.all()
+		board_name = self.kwargs['board_name']		
+		return get_model(board_name).objects.order_by('-created')
  
-
-
 
 
 
