@@ -93,13 +93,8 @@ class index(ListView):
 
 	template_name = 'board/index.html'
 
-
 	def get_queryset(self):
-		#t = xxx.getModel("travel").objects.all()
-		t = table_map["travel"].objects.all()
-
-		print(type(t))
-		return t
+		return getModel("travel").objects.all()
  
 
 
