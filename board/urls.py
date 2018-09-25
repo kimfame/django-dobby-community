@@ -22,6 +22,11 @@ app_name = 'board'
 urlpatterns = [
 	#path('', views.index, name='index'),
 	#path('', views.index.as_view(), name='index'),
-	path('<slug:board_name>', views.IndexView.as_view(), name='index'),
+	
+    path('<slug:board_name>/list', views.List.as_view(), name='list'),
+    path('<slug:board_name>/read/<int:pk>', views.Read.as_view(), name='read'),
+    path('<slug:board_name>/create', views.Create.as_view(), name='create'),
+    path('<slug:board_name>/update/<int:pk>', views.Update.as_view(), name='update'),
+    #path('<slug:board_name>/delete/<int:pk>', views.Delete.as_view(), name='delete')
 
 ]

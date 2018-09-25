@@ -58,6 +58,13 @@ INSTALLED_APPS = [
 
     # my apps
     'board',
+
+    # allauth
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +94,14 @@ TEMPLATES = [
         },
     },
 ]
+
+# allauth
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
 
 WSGI_APPLICATION = 'dobby.wsgi.application'
 
@@ -142,6 +157,22 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# allauth
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION="none"
+
+########## test
+LOGIN_REDIRECT_URL = "/board/travel"
+
+
+
+
+
+
+
 
 
 # Static files (CSS, JavaScript, Images)

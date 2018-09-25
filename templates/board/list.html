@@ -1,0 +1,60 @@
+<h1>TEST PAGE</h1>
+
+<a href="{% url 'board:create' view.kwargs.board_name %}">new article</a>
+
+
+{% if list %}
+<table>
+	{% for row in list %}
+	<tr>
+		<td>{{ row.id }}</td>
+		<td><a href="{% url 'board:read' view.kwargs.board_name row.id %}">{{ row.title }}</a></td>
+		<td>{{ row.nickname }}</td>
+		<td>{{ row.hit }}</td>
+		<td>{{ row.updated }}</td>
+		<td>{{ row.created }}</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<h1>No data</h1>
+{% endif %}
+
+
+
+{% if is_paginated %}
+
+	{% if page_obj.has_previous %}
+<a href="?page=1">first</a>
+<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+	
+	{% else %}
+<a href="#">first</a>
+<a href="#">Previous</a>
+
+	{% endif %}
+
+
+
+	{% for page in page_range %}
+		{% if page == page_obj.number %}
+
+<a href="#">[{{ page }}]</a>
+
+		{% else %}
+
+<a href="?page={{ page }}">{{ page }}</a>
+
+		{% endif %}
+	{% endfor %}
+
+	{% if page_obj.has_next %}
+<a href="?page={{ page_obj.next_page_number }}">Next</a>
+<a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+
+	{% else %}
+<a href="#">Next</a>
+<a href="#">Last</a>
+	{% endif %}
+
+{% endif %}
