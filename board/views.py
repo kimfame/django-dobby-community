@@ -2,6 +2,8 @@
 
 from django.urls import reverse_lazy
 
+from django.http import HttpResponseRedirect
+
 # models
 from django.db import models
 from .models import BaseBoard, Computer, Programming, Travel
@@ -209,6 +211,30 @@ class Update(UpdateView):
 		return reverse_lazy('board:read', args=(self.kwargs['board_name'], self.object.id))
 
 
+
+class Delete(DetailView):
+	template_name = 'board/confirm_delete.html'
+
+	def get_queryset(self):
+		board_name = self.kwargs['board_name']
+		return get_model(board_name).objects.filter(id=self.kwargs['pk'])
+
+	def get_success_url(self):
+		return reverse_lazy('board:list', args=(self.kwargs['board_name'],))
+
+	# Fix problem blew
+	# Method Not Allowed (POST): /board/travel/delete/30
+	# Method Not Allowed: /board/travel/delete/30
+	# POST /board/travel/delete/30 HTTP/1.1" 405 0
+	def post(self, request, *args, **kwargs):
+		return self.delete(request, *args, **kwargs)
+
+	def delete(self, request, *args, **kwargs):
+		board_name = self.kwargs['board_name']
+		self.object = get_model(board_name).objects.filter(id=self.kwargs['pk'])
+		success_url = reverse_lazy('board:list', args=(self.kwargs['board_name'],))
+		self.object.delete()
+		return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
 
 
 

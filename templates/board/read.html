@@ -1,6 +1,11 @@
+<p>[글번호] : {{ object.id }}</p>
 <p>[제목] : {{ object.title }}</p>
 <p>[내용] : {{ object.content }}</p>
 <p>[작성일] : {{ object.created }}</p>
 <p>[수정일] : {{ object.updated }}</p>
 <p>[작성자] : {{ object.nickname }}</p>
 <p>[조회수] : {{ object.hit }}</p>
+
+
+<a href="{% url 'board:update' view.kwargs.board_name object.id  %}">Update</a>
+<a href="{% url 'board:delete' view.kwargs.board_name object.id %}">Delete</a>
