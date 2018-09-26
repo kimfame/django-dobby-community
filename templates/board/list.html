@@ -1,7 +1,9 @@
-<h1>TEST PAGE</h1>
+{% extends "board/base.html" %}
 
-<a href="{% url 'board:create' view.kwargs.board_name %}">new article</a>
+{% block content %}
 
+
+<h2>Board : {{ view.kwargs.board_name }}</h2>
 
 {% if list %}
 <table>
@@ -58,3 +60,7 @@
 	{% endif %}
 
 {% endif %}
+
+
+
+{% endblock %}

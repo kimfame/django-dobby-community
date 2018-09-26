@@ -11,6 +11,11 @@ from .models import BaseBoard, Computer, Programming, Travel
 # class view
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+# auth
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+
 
 ### example function based view
 # def index(request):
@@ -180,7 +185,7 @@ class Read(DetailView):
 		board_name = self.kwargs['board_name']
 		return get_model(board_name).objects.filter(id=self.kwargs['pk'])
 
-
+@method_decorator(login_required, name='dispatch')
 class Create(CreateView):
 	fields = ['title', 'content']
 	template_name = 'board/form.html'
@@ -191,6 +196,7 @@ class Create(CreateView):
 
 	def form_valid(self, form):
 		obj = form.save(commit=False)
+		##### nickname
 		obj.nickname = self.request.user
 		obj.save()
 		return super(Create, self).form_valid(form)
@@ -199,6 +205,8 @@ class Create(CreateView):
 		return reverse_lazy('board:read', args=(self.kwargs['board_name'], self.object.id))
 
 
+
+@method_decorator(login_required, name='dispatch')
 class Update(UpdateView):
 	fields = ['title', 'content']
 	template_name = 'board/form.html'
@@ -210,8 +218,16 @@ class Update(UpdateView):
 	def get_success_url(self):
 		return reverse_lazy('board:read', args=(self.kwargs['board_name'], self.object.id))
 
+	# check writer
+	def dispatch(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		##### nickname
+		if not request.user == self.object.nickname:
+			return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
+		return super(Update, self).dispatch(request, *args, **kwargs)
 
 
+@method_decorator(login_required, name='dispatch')
 class Delete(DetailView):
 	template_name = 'board/confirm_delete.html'
 
@@ -237,7 +253,13 @@ class Delete(DetailView):
 		return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
 
 
-
+	# check writer
+	def dispatch(self, request, *args, **kwargs):
+		self.object = self.get_object()
+		### nickname
+		if not request.user == self.object.nickname:
+			return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
+		return super(Delete, self).dispatch(request, *args, **kwargs)
 
 
 

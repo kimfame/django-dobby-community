@@ -1,3 +1,7 @@
+{% extends "board/base.html" %}
+
+{% block content %}
+
 <p>[글번호] : {{ object.id }}</p>
 <p>[제목] : {{ object.title }}</p>
 <p>[내용] : {{ object.content }}</p>
@@ -9,3 +13,5 @@
 
 <a href="{% url 'board:update' view.kwargs.board_name object.id  %}">Update</a>
 <a href="{% url 'board:delete' view.kwargs.board_name object.id %}">Delete</a>
+
+{% endblock %}
