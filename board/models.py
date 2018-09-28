@@ -21,7 +21,7 @@ class BaseBoard(models.Model):
 	hit = models.PositiveIntegerField(default=0)
 	updated = models.DateTimeField(auto_now=True)
 	created = models.DateTimeField(default=timezone.now)
-
+	
 	def __str__(self):
 		return self.title
 

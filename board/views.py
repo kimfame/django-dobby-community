@@ -89,7 +89,8 @@ print("*********************************** GLOBAL")
 for table in tables:
 	print("===> " + table)
 	class BoardClass(BaseBoard):
-
+		pass
+		
 		class Meta:
 			db_table = "board_" + table
 
