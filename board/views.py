@@ -197,8 +197,7 @@ class Create(CreateView):
 
 	def form_valid(self, form):
 		obj = form.save(commit=False)
-		##### nickname
-		obj.nickname = self.request.user
+		obj.user = self.request.user
 		obj.save()
 		return super(Create, self).form_valid(form)
 
@@ -222,8 +221,8 @@ class Update(UpdateView):
 	# check writer
 	def dispatch(self, request, *args, **kwargs):
 		self.object = self.get_object()
-		##### nickname
-		if not request.user == self.object.nickname:
+
+		if not request.user == self.object.user:
 			return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
 		return super(Update, self).dispatch(request, *args, **kwargs)
 
@@ -257,8 +256,8 @@ class Delete(DetailView):
 	# check writer
 	def dispatch(self, request, *args, **kwargs):
 		self.object = self.get_object()
-		### nickname
-		if not request.user == self.object.nickname:
+
+		if not request.user == self.object.user:
 			return HttpResponseRedirect(reverse_lazy('board:list', args=(self.kwargs['board_name'],)))
 		return super(Delete, self).dispatch(request, *args, **kwargs)
 

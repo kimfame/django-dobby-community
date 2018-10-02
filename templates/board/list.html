@@ -11,7 +11,7 @@
 	<tr>
 		<td>{{ row.id }}</td>
 		<td><a href="{% url 'board:read' view.kwargs.board_name row.id %}">{{ row.title }}</a></td>
-		<td>{{ row.nickname }}</td>
+		<td>{{ row.user }}</td>
 		<td>{{ row.hit }}</td>
 		<td>{{ row.updated }}</td>
 		<td>{{ row.created }}</td>

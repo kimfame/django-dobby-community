@@ -123,6 +123,7 @@ pip-selfcheck.json
 ### Django ###
 *.pyc
 media
+static/
 staticfiles/
 migrations/
 

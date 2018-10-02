@@ -61,10 +61,13 @@ INSTALLED_APPS = [
 
     # allauth
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    # ckeditor
+    'ckeditor',
+
 ]
 
 MIDDLEWARE = [
