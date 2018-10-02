@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 
     # ckeditor
     'ckeditor',
-    'ckeditor_uploader',
+    #'ckeditor_uploader',
 
 ]
 
@@ -191,5 +191,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # ckeditor
-CKEDITOR_UPLOAD_PATH = "uploads/"
+#CKEDITOR_UPLOAD_PATH = "uploads/"
 #CKEDITOR_IMAGE_BACKEND = "pillow"
